@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Minit Mesyuarat Khas JPN – PPD Kedah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0E2439;
+    --navy-2:#1A3350;
+    --navy-soft:#1B3A57;
+    --brass:#B08D57;
+    --brass-lt:#D8BE8E;
+    --paper:#F6F4EF;
+    --card:#FFFFFF;
+    --ink:#12202E;
+    --muted:#6B7A88;
+    --line:#E2DED4;
+    --ok:#2E7D5B;
+    --warn:#C08A24;
+    --bad:#B4462F;
+    --radius:10px;
+    --shadow:0 1px 2px rgba(14,36,57,.06), 0 8px 24px rgba(14,36,57,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    background:var(--paper);color:var(--ink);
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em}
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  /* ---------- Chrome ---------- */
+  header.top{
+    background:var(--navy);color:#fff;padding:14px 20px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    border-bottom:3px solid var(--brass);
+  }
+  .crest{
+    width:38px;height:38px;border-radius:8px;flex:0 0 auto;
+    background:linear-gradient(150deg,var(--brass),#8E6E3E);
+    display:grid;place-items:center;font-family:'Fraunces',serif;
+    font-weight:700;color:#0E2439;font-size:15px;
+  }
+  .top h1{font-size:17px;color:#fff;line-height:1.2}
+  .top .sub{font-size:12px;color:var(--brass-lt);letter-spacing:.06em;text-transform:uppercase}
+  .top .spacer{flex:1}
+  .badge-bil{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+    border:1px solid rgba(216,190,142,.5);color:var(--brass-lt);
+    padding:5px 10px;border-radius:6px;white-space:nowrap;
+  }
+
+  nav.tabs{
+    background:var(--navy-soft);display:flex;gap:2px;padding:0 12px;
+    overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:20;
+  }
+  nav.tabs::-webkit-scrollbar{display:none}
+  nav.tabs button{
+    background:none;border:0;color:#A9BED0;font:inherit;font-size:13.5px;font-weight:600;
+    padding:12px 14px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;
+  }
+  nav.tabs button:hover{color:#fff}
+  nav.tabs button.on{color:#fff;border-bottom-color:var(--brass)}
+  nav.tabs button:focus-visible{outline:2px solid var(--brass);outline-offset:-2px}
+
+  main{max-width:1080px;margin:0 auto;padding:22px 16px 90px}
+  .panel{display:none}
+  .panel.on{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+        box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
+  .card > h2{font-size:19px;margin-bottom:4px}
+  .card > .hint{color:var(--muted);font-size:13px;margin-bottom:14px}
+
+  .eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);
+           font-weight:700;margin-bottom:6px}
+
+  label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;
+        letter-spacing:.02em}
+  input,select,textarea{
+    width:100%;font:inherit;font-size:14px;color:var(--ink);background:#fff;
+    border:1px solid var(--line);border-radius:8px;padding:9px 11px;
+  }
+  textarea{resize:vertical;line-height:1.6}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--brass);outline-offset:1px;border-color:var(--brass)}
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:680px){.g2,.g3{grid-template-columns:1fr}}
+
+  button.btn{
+    font:inherit;font-weight:600;font-size:13.5px;cursor:pointer;
+    border-radius:8px;padding:9px 15px;border:1px solid var(--navy);
+    background:var(--navy);color:#fff;
+  }
+  button.btn:hover{background:#1A3350}
+  button.btn.ghost{background:#fff;color:var(--navy);border-color:var(--line)}
+  button.btn.ghost:hover{border-color:var(--brass);color:var(--navy)}
+  button.btn.brass{background:var(--brass);border-color:var(--brass);color:#1A1408}
+  button.btn.danger{background:#fff;color:var(--bad);border-color:#E9D3CD}
+  button.btn.sm{padding:5px 10px;font-size:12px;border-radius:6px}
+  button.btn:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .right{margin-left:auto}
+
+  /* ---------- Perkara cards ---------- */
+  .perkara{border:1px solid var(--line);border-left:4px solid var(--navy);
+           border-radius:8px;padding:14px;margin-bottom:12px;background:#fff}
+  .perkara.d-tindakan{border-left-color:var(--brass)}
+  .perkara.d-perhatian{border-left-color:var(--warn)}
+  .perkara.d-makluman{border-left-color:#9FB0BF}
+  .perkara .head{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+  .ref{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);
+       background:var(--paper);border:1px solid var(--line);padding:3px 7px;border-radius:5px;white-space:nowrap}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+       padding:3px 8px;border-radius:20px}
+  .t-makluman{background:#EDF1F4;color:#4A5D6E}
+  .t-perhatian{background:#FBF1DC;color:#8A6410}
+  .t-tindakan{background:#F3E9D8;color:#7A5C25}
+
+  /* ---------- Susulan ---------- */
+  table.matrix{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.matrix th,table.matrix td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+  table.matrix th{background:var(--navy);color:#fff;font-weight:600;font-size:12px;
+                  letter-spacing:.04em;text-transform:uppercase}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px}
+  .p-belum{background:#F7E3DE;color:var(--bad)}
+  .p-dalam{background:#FBF1DC;color:#8A6410}
+  .p-selesai{background:#DEF0E7;color:var(--ok)}
+
+  .stat{background:var(--navy);color:#fff;border-radius:var(--radius);padding:16px;flex:1;min-width:130px}
+  .stat .n{font-family:'Fraunces',serif;font-size:30px;font-weight:600;line-height:1}
+  .stat .l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-lt);margin-top:4px}
+  .stat.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .stat.alt .l{color:var(--muted)}
+
+  /* ---------- Paper preview (signature) ---------- */
+  .paper-wrap{background:#DDD8CE;padding:20px;border-radius:var(--radius);overflow-x:auto}
+  .paper{
+    background:#fff;width:760px;max-width:100%;margin:0 auto;padding:52px 60px 44px;
+    box-shadow:0 4px 20px rgba(0,0,0,.14);font-family:Arial,Helvetica,sans-serif;
+    font-size:13px;line-height:1.5;color:#000;position:relative;
+  }
+  .paper .terhad{position:absolute;top:16px;left:60px;font-size:10px;color:#999;letter-spacing:.1em}
+  .paper .terhad.r{left:auto;right:60px;top:auto;bottom:16px}
+  .paper h1{font-family:Arial,sans-serif;font-size:14px;font-weight:700;text-align:center;
+            text-transform:uppercase;line-height:1.4;margin-bottom:18px}
+  .paper .sec{margin-bottom:14px}
+  .paper .sec-t{font-weight:700;text-transform:uppercase;margin-bottom:6px}
+  .paper .sub-t{font-weight:400;margin-bottom:6px}
+  .paper .disp{text-align:right;font-weight:700;margin-top:6px}
+  .paper .tind{text-align:right;margin-top:8px;font-size:12px}
+  .paper .tind b{display:block}
+  .paper .meta td{padding:1px 8px 1px 0;vertical-align:top}
+  .paper .ahli{margin-bottom:12px}
+  .paper .ahli .nm{font-weight:700}
+  .paper hr{border:0;border-top:1px solid #ccc;margin:22px 0}
+
+  .toast{
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);
+    background:var(--navy);color:#fff;padding:11px 20px;border-radius:24px;font-size:13.5px;
+    font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.25);z-index:99;opacity:0;
+    transition:all .3s cubic-bezier(.2,.8,.2,1);border:1px solid var(--brass);
+  }
+  .toast.on{transform:translateX(-50%) translateY(0);opacity:1}
+  .empty{text-align:center;padding:36px 16px;color:var(--muted);font-size:14px;
+         border:1px dashed var(--line);border-radius:8px}
+  .note{background:#FBF7EE;border:1px solid var(--brass-lt);border-radius:8px;padding:12px 14px;
+        font-size:13px;color:#6B5322;margin-bottom:14px}
+  .save-dot{font-size:11px;color:var(--brass-lt)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="crest">JPN</div>
+  <div>
+    <div class="sub">Jabatan Pendidikan Negeri Kedah</div>
+    <h1>Mesyuarat Khas JPN bersama PPD</h1>
+  </div>
+  <div class="spacer"></div>
+  <div class="badge-bil" id="badgeBil">Bil. 1/2026</div>
+  <div class="save-dot" id="saveDot"></div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-t="papan" class="on">Papan Utama</button>
+  <button data-t="ahli">Ahli &amp; Kehadiran</button>
+  <button data-t="bilik">Bilik Mesyuarat</button>
+  <button data-t="studio">Studio Minit</button>
+  <button data-t="minit">Pratonton &amp; Eksport</button>
+  <button data-t="susulan">Matriks Susulan</button>
+  <button data-t="sync">Sync</button>
+  <button data-t="tetapan">Tetapan</button>
+</nav>
+
+<main>
+
+<!-- ============ PAPAN ============ -->
+<section class="panel on" id="p-papan">
+  <div class="card">
+    <div class="eyebrow">Butiran Mesyuarat</div>
+    <h2>Mesyuarat Khas JPN bersama PPD</h2>
+    <p class="hint">Isi butiran di bawah. Semua maklumat ini mengalir terus ke kepala minit.</p>
+    <div class="grid g3">
+      <div><label>Bilangan</label><input type="number" id="m_bil" min="1"></div>
+      <div><label>Tahun</label><input type="number" id="m_tahun"></div>
+      <div><label>Tarikh</label><input type="date" id="m_tarikh"></div>
+    </div>
+    <div class="grid g3" style="margin-top:12px">
+      <div><label>Masa</label><input id="m_masa" placeholder="09:00 pagi"></div>
+      <div><label>Tempat</label><input id="m_tempat" placeholder="Bilik Mesyuarat Anjung Perdana, JPN Kedah"></div>
+      <div><label>Pengerusi</label><select id="m_pengerusi"></select></div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom:16px">
+    <div class="stat"><div class="n" id="s_perkara">0</div><div class="l">Perkara</div></div>
+    <div class="stat alt"><div class="n" id="s_tindakan">0</div><div class="l">Tindakan</div></div>
+    <div class="stat alt"><div class="n" id="s_hadir">0</div><div class="l">Hadir</div></div>
+    <div class="stat alt"><div class="n" id="s_tidak">0</div><div class="l">Tidak Hadir</div></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Aliran Kerja</div>
+    <h2>Tiga langkah sahaja</h2>
+    <p class="hint">Sistem ini direka untuk digunakan sepanjang mesyuarat, bukan selepasnya.</p>
+    <ol style="padding-left:18px;font-size:14px;line-height:1.9">
+      <li><b>Sebelum</b> — tanda kehadiran di tab Ahli. Lampiran A terjana sendiri.</li>
+      <li><b>Semasa</b> — buka Bilik Mesyuarat. Taip keputusan terus, tanda disposisi.</li>
+      <li><b>Selepas</b> — Studio Minit (jika ada rakaman) → Pratonton → Eksport Word.</li>
+    </ol>
+    <div class="row" style="margin-top:16px">
+      <button class="btn" onclick="go('bilik')">Buka Bilik Mesyuarat</button>
+      <button class="btn ghost" onclick="simpanFail()">Simpan fail sandaran (.json)</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AHLI ============ -->
+<section class="panel" id="p-ahli">
+  <div class="card">
+    <div class="eyebrow">Lampiran A</div>
+    <h2>Ahli &amp; Kehadiran</h2>
+    <p class="hint">Tanda kehadiran sekali sahaja. Direktori ini kekal untuk semua mesyuarat akan datang.</p>
+    <div class="note">Nama ahli masih kosong. Isi sekali, guna selama-lamanya — Lampiran A tidak perlu ditaip semula setiap bulan.</div>
+    <div class="row" style="margin-bottom:14px">
+      <button class="btn ghost sm" onclick="tandaSemua('hadir')">Tanda semua Hadir</button>
+      <button class="btn ghost sm" onclick="tambahAhli('Turut Hadir')">+ Turut Hadir</button>
+      <button class="btn ghost sm" onclick="tambahAhli('Urus Setia')">+ Urus Setia</button>
+    </div>
+    <div id="listAhli"></div>
+  </div>
+</section>
+
+<!-- ============ BILIK ============ -->
+<section class="panel" id="p-bilik">
+  <div class="card">
+    <div class="eyebrow">Semasa Mesyuarat</div>
+    <h2>Bilik Mesyuarat</h2>
+    <p class="hint">Setiap perkara perlu satu disposisi. Hanya <b>Tindakan</b> yang masuk Matriks Susulan.</p>
+    <div class="row" style="margin-bottom:14px">
+      <button class="btn brass" onclick="tambahPerkara()">+ Perkara baharu</button>
+      <button class="btn ghost sm" onclick="nomborSemula()">Nombor semula</button>
+      <span class="right save-dot" id="autoNote">Disimpan automatik</span>
+    </div>
+    <div id="listPerkara"></div>
+  </div>
+</section>
+
+<!-- ============ STUDIO ============ -->
+<section class="panel" id="p-studio">
+  <div class="card">
+    <div class="eyebrow">Selepas Mesyuarat</div>
+    <h2>Studio Minit</h2>
+    <p class="hint">Tampal transkrip rakaman. AI tidak menulis minit — ia mengeluarkan struktur, dan Cikgu yang sahkan.</p>
+
+    <label>Transkrip mesyuarat</label>
+    <textarea id="transkrip" rows="7" placeholder="Tampal transkrip audio di sini…"></textarea>
+
+    <div class="row" style="margin:12px 0">
+      <button class="btn" onclick="salinPrompt()">Salin prompt + transkrip</button>
+      <button class="btn ghost" onclick="jalankanAI()">Jana terus (kunci Gemini)</button>
+    </div>
+    <div class="note">
+      <b>Cara paling selamat:</b> tekan <i>Salin prompt</i>, tampal dalam Gemini atau ChatGPT,
+      salin balik JSON yang keluar, tampal di bawah. Tiada kunci API diperlukan.
+    </div>
+
+    <label>Tampal JSON dari AI</label>
+    <textarea id="jsonMasuk" rows="6" placeholder='[{"no":"3.1","tajuk":"…","isi":"…","disposisi":"Tindakan","pemilik":"Semua PPD","tarikh_sasar":"2026-08-15"}]'></textarea>
+    <div class="row" style="margin-top:12px">
+      <button class="btn brass" onclick="importJSON()">Import ke Bilik Mesyuarat</button>
+      <span class="save-dot" id="aiNote"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MINIT ============ -->
+<section class="panel" id="p-minit">
+  <div class="card">
+    <div class="eyebrow">Dokumen Rasmi</div>
+    <h2>Pratonton &amp; Eksport</h2>
+    <p class="hint">Format mengikut konvensyen minit JPN Kedah — TERHAD, Lampiran A, blok tandatangan.</p>
+    <div class="row" style="margin-bottom:16px">
+      <button class="btn brass" onclick="eksportWord()">Muat turun Word (.doc)</button>
+      <button class="btn ghost" onclick="window.print()">Cetak / PDF</button>
+      <button class="btn ghost" onclick="salinWhatsApp()">Salin ringkasan keputusan</button>
+      <button class="btn ghost sm right" onclick="renderMinit()">Muat semula pratonton</button>
+    </div>
+  </div>
+  <div class="card" style="border-left:4px solid var(--brass)">
+    <div class="eyebrow">Edaran</div>
+    <h2>Hantar Keputusan</h2>
+    <p class="hint">PDF ringkas untuk tindakan segera — bukan minit penuh. Setiap penerima menerima badan e-mel berbeza yang menyenaraikan tindakan <i>mereka</i> sahaja.</p>
+
+    <label style="display:flex;gap:10px;align-items:flex-start;background:#FBF7EE;border:1px solid var(--brass-lt);
+                  padding:12px 14px;border-radius:8px;cursor:pointer;font-size:13.5px;color:#6B5322;font-weight:500">
+      <input type="checkbox" id="m_disemak" style="width:auto;margin-top:3px" onchange="setDisemak(this.checked)">
+      <span><b>Saya sahkan keputusan ini telah disemak.</b> Butang edaran kekal terkunci sehingga kotak ini ditanda.</span>
+    </label>
+
+    <div class="row" style="margin-top:14px">
+      <button class="btn ghost" onclick="janaPdfKeputusan()">Pratonton PDF</button>
+      <button class="btn brass" id="btnHantar" onclick="hantarKeputusan()" disabled>Hantar Keputusan</button>
+      <span class="save-dot right" id="e_stat"></span>
+    </div>
+    <div id="e_penerima" style="margin-top:14px"></div>
+  </div>
+
+  <div class="paper-wrap"><div class="paper" id="paper"></div></div>
+</section>
+
+<!-- ============ SUSULAN ============ -->
+<section class="panel" id="p-susulan">
+  <div class="card">
+    <div class="eyebrow">Selepas Mesyuarat</div>
+    <h2>Matriks Susulan</h2>
+    <p class="hint">Setiap tindakan kekal dengan ID rujukannya. Yang belum selesai akan menjadi Perkara Berbangkit bulan hadapan.</p>
+    <div id="matriks"></div>
+  </div>
+</section>
+
+<!-- ============ SYNC ============ -->
+<section class="panel" id="p-sync">
+  <div class="card">
+    <div class="eyebrow">Google Sheets</div>
+    <h2>Sync</h2>
+    <p class="hint">Sistem tetap berfungsi tanpa talian. Sync hanya diperlukan untuk menyimpan kekal dan menarik Perkara Berbangkit.</p>
+    <div class="grid g2">
+      <div><label>URL Web App (GAS)</label><input id="y_url" placeholder="https://script.google.com/macros/s/…/exec"></div>
+      <div><label>PIN urusetia</label><input id="y_pin" type="password" placeholder="1234"></div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn ghost" onclick="ujiTalian()">Uji talian</button>
+      <button class="btn brass" onclick="hantarKeSheets()">Hantar ke Sheets</button>
+      <button class="btn ghost" onclick="tarikDariSheets()">Tarik dari Sheets</button>
+      <span class="save-dot right" id="y_stat"></span>
+    </div>
+    <div class="note" style="margin-top:16px">
+      <b>Hantar</b> menulis mesyuarat ini ke Sheets. <b>Tarik</b> menggantikan data dalam pelayar dengan data Sheets.
+      Simpan fail sandaran dahulu jika ragu.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Enjin Kesinambungan</div>
+    <h2>Perkara Berbangkit</h2>
+    <p class="hint">Tindakan dari mesyuarat terdahulu yang belum selesai. ID rujukan asalnya kekal.</p>
+    <div class="row" style="margin-bottom:14px">
+      <button class="btn" onclick="tarikBerbangkit()">Tarik perkara belum selesai</button>
+    </div>
+    <div id="y_bangkit"><div class="empty">Untuk Bil. 1, senarai ini sepatutnya kosong.</div></div>
+  </div>
+</section>
+
+<!-- ============ TETAPAN ============ -->
+<section class="panel" id="p-tetapan">
+  <div class="card">
+    <div class="eyebrow">Konfigurasi</div>
+    <h2>Tetapan</h2>
+    <div class="grid g2">
+      <div><label>Tajuk minit</label><input id="t_tajuk"></div>
+      <div><label>Awalan rujukan</label><input id="t_ref" placeholder="G5"></div>
+    </div>
+    <div class="grid g2" style="margin-top:12px">
+      <div><label>Disediakan oleh</label><input id="t_sedia"></div>
+      <div><label>Jawatan penyedia</label><input id="t_sediaJ"></div>
+    </div>
+    <div class="grid g2" style="margin-top:12px">
+      <div><label>Disemak oleh</label><input id="t_semak"></div>
+      <div><label>Jawatan penyemak</label><input id="t_semakJ"></div>
+    </div>
+    <div class="grid g2" style="margin-top:12px">
+      <div><label>Diluluskan oleh</label><input id="t_lulus"></div>
+      <div><label>Jawatan pelulus</label><input id="t_lulusJ"></div>
+    </div>
+    <div style="margin-top:12px">
+      <label>Kunci API Gemini (pilihan)</label>
+      <input id="t_key" type="password" placeholder="Kosongkan jika guna kaedah salin prompt">
+    </div>
+  </div>
+  <div class="card">
+    <h2>Data</h2>
+    <p class="hint">Sistem menyimpan sendiri dalam pelayar. Simpan fail sandaran sebelum mesyuarat penting.</p>
+    <div class="row">
+      <button class="btn ghost" onclick="simpanFail()">Simpan fail (.json)</button>
+      <button class="btn ghost" onclick="document.getElementById('fileIn').click()">Buka fail (.json)</button>
+      <input type="file" id="fileIn" accept=".json" hidden onchange="bukaFail(event)">
+      <button class="btn danger right" onclick="resetSemua()">Set semula semua</button>
+    </div>
+  </div>
+</section>
+
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= Storage shim ================= */
+const mem = {};
+const KEY = 'minit_g5_jpn_kedah_v1';
+const store = {
+  async get(k){
+    try{ if(window.storage){const r = await window.storage.get(k); return r ? r.value : null;} }catch(e){}
+    try{ const v = localStorage.getItem(k); if(v!==null) return v; }catch(e){}
+    return mem[k] ?? null;
+  },
+  async set(k,v){
+    try{ if(window.storage){ await window.storage.set(k,v); return; } }catch(e){}
+    try{ localStorage.setItem(k,v); return; }catch(e){}
+    mem[k]=v;
+  },
+  async del(k){
+    try{ if(window.storage){ await window.storage.delete(k); } }catch(e){}
+    try{ localStorage.removeItem(k); }catch(e){}
+    delete mem[k];
+  }
+};
+
+/* ================= Seed ================= */
+const PPD = ['Baling','Kota Setar','Kubang Pasu','Kuala Muda','Kulim/Bandar Baharu',
+             'Langkawi','Padang Terap','Pendang','Sik','Yan'];
+const TPP = ['Perancangan dan Pengurusan PPD','Pembelajaran','Pengurusan Sekolah','Pembangunan Murid'];
+
+function seed(){
+  const ahli = [];
+  let i = 1;
+  ahli.push({id:'a'+(i++), nama:'', jawatan:'Pengarah Pendidikan',
+             pejabat:'Pejabat Pengarah', kategori:'G5', kehadiran:'hadir', wakil:'', pengerusi:true});
+  TPP.forEach(t=>ahli.push({id:'a'+(i++), nama:'',
+             jawatan:'Timbalan Pengarah Pendidikan '+t, pejabat:'Pejabat Pengarah',
+             kategori:'G5', kehadiran:'hadir', wakil:''}));
+  PPD.forEach(d=>ahli.push({id:'a'+(i++), nama:'', jawatan:'Pegawai Pendidikan Daerah',
+             pejabat:'Pejabat Pendidikan Daerah '+d, kategori:'PPD', kehadiran:'hadir', wakil:''}));
+  ahli.push({id:'a'+(i++), nama:'', jawatan:'Penolong Pegawai Pendidikan',
+             pejabat:'Sektor Perancangan & Pengurusan PPD', kategori:'Urus Setia',
+             kehadiran:'hadir', wakil:''});
+
+  const perkara = [
+    {id:'p1', no:'1', tajuk:'PERUTUSAN PENGERUSI',
+     isi:'Mesyuarat dimulakan dengan bacaan doa dan ucapan salam oleh Tuan Pengerusi. Tuan Pengerusi merakamkan ucapan terima kasih atas kehadiran semua ahli mesyuarat.',
+     disposisi:'Makluman', pemilik:'', tarikh_sasar:'', status:'Belum Mula'},
+    {id:'p2', no:'2', tajuk:'PENUBUHAN DAN TERMA RUJUKAN JAWATANKUASA',
+     isi:'Mesyuarat dimaklumkan bahawa Mesyuarat Khas JPN bersama Pegawai Pendidikan Daerah Negeri Kedah ditubuhkan bagi tujuan penyelarasan dasar, pemantauan pelaksanaan dan penyelesaian isu di peringkat daerah. Mesyuarat akan diadakan sekali sebulan.',
+     disposisi:'Makluman', pemilik:'', tarikh_sasar:'', status:'Belum Mula'},
+    {id:'p3', no:'3', tajuk:'PERKARA-PERKARA BAHARU',
+     isi:'', disposisi:'Perhatian', pemilik:'', tarikh_sasar:'', status:'Belum Mula'},
+    {id:'p4', no:'4', tajuk:'HAL-HAL LAIN',
+     isi:'', disposisi:'Perhatian', pemilik:'', tarikh_sasar:'', status:'Belum Mula'},
+    {id:'p5', no:'5', tajuk:'PENUTUP',
+     isi:'Tuan Pengerusi berharap setiap isu yang dibangkitkan dapat diselesaikan dengan segera. Mesyuarat ditangguhkan pada jam ___.',
+     disposisi:'Makluman', pemilik:'', tarikh_sasar:'', status:'Belum Mula'}
+  ];
+
+  return {
+    m:{bil:1, tahun:2026, tarikh:'2026-07-16', masa:'', tempat:'', pengerusi:'a1'},
+    t:{tajuk:'MINIT MESYUARAT KHAS JPN BERSAMA PEGAWAI PENDIDIKAN DAERAH NEGERI KEDAH',
+       ref:'G5', sedia:'', sediaJ:'Penolong Pegawai Pendidikan',
+       semak:'', semakJ:'Ketua Penolong Pengarah', lulus:'', lulusJ:'Pengarah Pendidikan', key:''},
+    ahli, perkara
+  };
+}
+
+let S = seed();
+
+/* ================= Helpers ================= */
+const $ = id => document.getElementById(id);
+const esc = s => (s??'').toString().replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid = () => 'x' + Math.random().toString(36).slice(2,9);
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(t._x); t._x=setTimeout(()=>t.classList.remove('on'),2300); }
+function refId(p){ return `${S.t.ref}/${S.m.bil}/${S.m.tahun} – ${p.no}`; }
+function tarikhBM(iso){
+  if(!iso) return '';
+  const B=['Januari','Februari','Mac','April','Mei','Jun','Julai','Ogos','September','Oktober','November','Disember'];
+  const H=['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'];
+  const d=new Date(iso+'T00:00:00');
+  return `${d.getDate()} ${B[d.getMonth()]} ${d.getFullYear()} (${H[d.getDay()]})`;
+}
+function namaAhli(id){ const a=S.ahli.find(x=>x.id===id); return a ? (a.nama||'(nama belum diisi)') : ''; }
+
+let saveTimer;
+function save(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
+    await store.set(KEY, JSON.stringify(S));
+    $('saveDot').textContent = '● tersimpan';
+    setTimeout(()=>$('saveDot').textContent='',1400);
+  }, 400);
+}
+
+/* ================= Tabs ================= */
+function go(t){
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on', b.dataset.t===t));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on', p.id==='p-'+t));
+  if(t==='minit') renderMinit();
+  if(t==='susulan') renderMatriks();
+  window.scrollTo({top:0,behavior:'instant'});
+}
+$('tabs').addEventListener('click', e=>{ if(e.target.dataset.t) go(e.target.dataset.t); });
+
+/* ================= Papan ================= */
+function bindPapan(){
+  $('m_bil').value=S.m.bil; $('m_tahun').value=S.m.tahun; $('m_tarikh').value=S.m.tarikh;
+  $('m_masa').value=S.m.masa; $('m_tempat').value=S.m.tempat;
+  const sel=$('m_pengerusi');
+  sel.innerHTML = S.ahli.filter(a=>a.kategori==='G5')
+    .map(a=>`<option value="${a.id}">${esc(a.nama||a.jawatan)}</option>`).join('');
+  sel.value=S.m.pengerusi;
+  ['bil','tahun','tarikh','masa','tempat','pengerusi'].forEach(k=>{
+    $('m_'+k).oninput = e => { S.m[k] = (k==='bil'||k==='tahun') ? +e.target.value : e.target.value; save(); stats(); };
+  });
+  ['tajuk','ref','sedia','sediaJ','semak','semakJ','lulus','lulusJ','key'].forEach(k=>{
+    $('t_'+k).value = S.t[k]||'';
+    $('t_'+k).oninput = e => { S.t[k]=e.target.value; save(); };
+  });
+  stats();
+}
+function stats(){
+  $('s_perkara').textContent = S.perkara.length;
+  $('s_tindakan').textContent = S.perkara.filter(p=>p.disposisi==='Tindakan').length;
+  $('s_hadir').textContent = S.ahli.filter(a=>a.kehadiran==='hadir'&&a.kategori!=='Turut Hadir'&&a.kategori!=='Urus Setia').length;
+  $('s_tidak').textContent = S.ahli.filter(a=>a.kehadiran==='tidak').length;
+  $('badgeBil').textContent = `Bil. ${S.m.bil}/${S.m.tahun}`;
+}
+
+/* ================= Ahli ================= */
+function renderAhli(){
+  const kat=['G5','PPD','Turut Hadir','Urus Setia'];
+  $('listAhli').innerHTML = kat.map(k=>{
+    const list=S.ahli.filter(a=>a.kategori===k);
+    if(!list.length) return '';
+    return `<div style="margin-bottom:18px">
+      <div class="eyebrow">${k==='G5'?'Pengarah &amp; Timbalan Pengarah':k}</div>
+      ${list.map(a=>`
+      <div class="perkara" style="border-left-color:var(--brass)">
+        <div class="grid g3">
+          <div><label>Nama</label><input value="${esc(a.nama)}" oninput="setA('${a.id}','nama',this.value)" placeholder="Nama penuh"></div>
+          <div><label>Jawatan</label><input value="${esc(a.jawatan)}" oninput="setA('${a.id}','jawatan',this.value)"></div>
+          <div><label>Pejabat / Sektor</label><input value="${esc(a.pejabat)}" oninput="setA('${a.id}','pejabat',this.value)"></div>
+        </div>
+        <div style="margin-top:10px">
+          <label>E-mel ${a.kategori==='G5'||a.kategori==='PPD'?'<span style="color:var(--bad)">— perlu untuk edaran keputusan</span>':''}</label>
+          <input type="email" value="${esc(a.emel||'')}" oninput="setA('${a.id}','emel',this.value)" placeholder="nama@moe.gov.my">
+        </div>
+        <div class="row" style="margin-top:10px">
+          <select style="max-width:170px" onchange="setA('${a.id}','kehadiran',this.value)">
+            ${['hadir','tidak','wakil'].map(v=>`<option value="${v}" ${a.kehadiran===v?'selected':''}>${
+              v==='hadir'?'Hadir':v==='tidak'?'Tidak Hadir':'Diwakili'}</option>`).join('')}
+          </select>
+          ${a.kehadiran==='wakil' ? `<input style="max-width:280px" placeholder="Nama wakil" value="${esc(a.wakil)}" oninput="setA('${a.id}','wakil',this.value)">` : ''}
+          ${a.pengerusi ? '<span class="tag t-tindakan">Pengerusi</span>' : ''}
+          <button class="btn danger sm right" onclick="buangAhli('${a.id}')">Buang</button>
+        </div>
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+function setA(id,k,v){ const a=S.ahli.find(x=>x.id===id); a[k]=v; save(); stats();
+  if(k==='kehadiran'||k==='nama') { renderAhli(); bindPapan(); } }
+function tambahAhli(kat){
+  S.ahli.push({id:uid(),nama:'',jawatan:'',pejabat:'',kategori:kat,kehadiran:'hadir',wakil:''});
+  save(); renderAhli();
+}
+function buangAhli(id){ S.ahli=S.ahli.filter(a=>a.id!==id); save(); renderAhli(); bindPapan(); }
+function tandaSemua(v){ S.ahli.forEach(a=>a.kehadiran=v); save(); renderAhli(); stats(); toast('Semua ditanda hadir'); }
+
+/* ================= Perkara ================= */
+function renderPerkara(){
+  const el=$('listPerkara');
+  if(!S.perkara.length){ el.innerHTML='<div class="empty">Tiada perkara lagi. Tekan “+ Perkara baharu” untuk mula.</div>'; return; }
+  el.innerHTML = S.perkara.map((p,i)=>`
+    <div class="perkara d-${p.disposisi.toLowerCase()}">
+      <div class="head">
+        <span class="ref">${esc(refId(p))}</span>
+        <span class="tag t-${p.disposisi.toLowerCase()}">${p.disposisi}</span>
+        <span class="right"></span>
+        <button class="btn ghost sm" onclick="gerak(${i},-1)" aria-label="Naik">↑</button>
+        <button class="btn ghost sm" onclick="gerak(${i},1)" aria-label="Turun">↓</button>
+        <button class="btn danger sm" onclick="buangPerkara('${p.id}')">Padam</button>
+      </div>
+      <div class="grid" style="grid-template-columns:90px 1fr">
+        <div><label>No.</label><input value="${esc(p.no)}" oninput="setP('${p.id}','no',this.value)"></div>
+        <div><label>Tajuk perkara</label><input value="${esc(p.tajuk)}" oninput="setP('${p.id}','tajuk',this.value)"></div>
+      </div>
+      <div style="margin-top:10px">
+        <label>Keputusan / catatan mesyuarat</label>
+        <textarea rows="4" oninput="setP('${p.id}','isi',this.value)" placeholder="Mesyuarat memutuskan bahawa…">${esc(p.isi)}</textarea>
+      </div>
+      <div class="grid g3" style="margin-top:10px">
+        <div><label>Disposisi</label>
+          <select onchange="setP('${p.id}','disposisi',this.value)">
+            ${['Makluman','Perhatian','Tindakan'].map(d=>`<option ${p.disposisi===d?'selected':''}>${d}</option>`).join('')}
+          </select>
+        </div>
+        ${p.disposisi==='Tindakan' ? `
+        <div><label>Tarikh sasar</label><input type="date" value="${esc(p.tarikh_sasar)}" oninput="setP('${p.id}','tarikh_sasar',this.value)"></div>
+        <div><label>Status</label>
+          <select onchange="setP('${p.id}','status',this.value)">
+            ${['Belum Mula','Dalam Tindakan','Selesai'].map(s=>`<option ${p.status===s?'selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>` : '<div></div><div></div>'}
+      </div>
+      ${p.disposisi==='Tindakan' ? `
+      <div style="margin-top:10px">
+        <label>Pemilik tindakan (satu baris satu pemilik)</label>
+        <textarea rows="2" oninput="setP('${p.id}','pemilik',this.value)" placeholder="Semua PPD">${esc(p.pemilik)}</textarea>
+        <div class="row" style="margin-top:6px">
+          <button class="btn ghost sm" onclick="addPemilik('${p.id}','Semua PPD')">Semua PPD</button>
+          <button class="btn ghost sm" onclick="addPemilik('${p.id}','Semua Sektor JPN')">Semua Sektor JPN</button>
+          <button class="btn ghost sm" onclick="addPemilik('${p.id}','Urus Setia')">Urus Setia</button>
+        </div>
+      </div>` : ''}
+    </div>`).join('');
+}
+function setP(id,k,v){
+  const p=S.perkara.find(x=>x.id===id); p[k]=v; save(); stats();
+  if(k==='disposisi'||k==='no') renderPerkara();
+}
+function addPemilik(id,nama){
+  const p=S.perkara.find(x=>x.id===id);
+  p.pemilik = (p.pemilik ? p.pemilik.trim()+'\n' : '') + nama;
+  save(); renderPerkara();
+}
+function tambahPerkara(){
+  S.perkara.push({id:uid(),no:String(S.perkara.length+1),tajuk:'',isi:'',
+                  disposisi:'Makluman',pemilik:'',tarikh_sasar:'',status:'Belum Mula'});
+  save(); renderPerkara(); stats();
+}
+function buangPerkara(id){ S.perkara=S.perkara.filter(p=>p.id!==id); save(); renderPerkara(); stats(); }
+function gerak(i,d){
+  const j=i+d; if(j<0||j>=S.perkara.length) return;
+  [S.perkara[i],S.perkara[j]]=[S.perkara[j],S.perkara[i]];
+  save(); renderPerkara();
+}
+function nomborSemula(){
+  let top=0, sub=0;
+  S.perkara.forEach(p=>{
+    if(p.no.includes('.')){ sub++; p.no = `${top}.${sub}`; }
+    else { top++; sub=0; p.no = String(top); }
+  });
+  save(); renderPerkara(); toast('Nombor dikemas kini');
+}
+
+/* ================= Studio ================= */
+function promptText(){
+  return `Anda ialah urusetia mesyuarat rasmi Jabatan Pendidikan Negeri Kedah.
+Baca transkrip di bawah dan keluarkan STRUKTUR minit — bukan karangan.
+
+Pulangkan HANYA satu array JSON, tiada teks lain, tiada backtick.
+Setiap objek:
+{
+ "no": "3.1",
+ "tajuk": "TAJUK PERKARA DALAM HURUF BESAR",
+ "isi": "Ayat minit rasmi. Gunakan gaya pasif institusi: 'Mesyuarat dimaklumkan bahawa…', 'Mesyuarat memutuskan bahawa…', 'Mesyuarat bersetuju…'. Jangan guna nama ganti diri.",
+ "disposisi": "Makluman" | "Perhatian" | "Tindakan",
+ "pemilik": "Nama pegawai atau entiti, satu baris satu pemilik. Kosongkan jika bukan Tindakan.",
+ "tarikh_sasar": "YYYY-MM-DD atau kosong"
+}
+
+Peraturan disposisi:
+- "Makluman" = mesyuarat hanya diberitahu, tiada tindakan.
+- "Perhatian" = perlu dipantau, tiada pemilik khusus.
+- "Tindakan" = ada pegawai/entiti yang wajib bertindak. Mesti ada pemilik.
+
+TRANSKRIP:
+${$('transkrip').value}`;
+}
+function salinPrompt(){
+  navigator.clipboard.writeText(promptText())
+    .then(()=>toast('Prompt disalin — tampal dalam Gemini'))
+    .catch(()=>toast('Salin gagal. Salin manual dari kotak transkrip.'));
+}
+async function jalankanAI(){
+  const key = S.t.key;
+  if(!key){ toast('Isi kunci Gemini di Tetapan, atau guna Salin prompt'); return; }
+  if(!$('transkrip').value.trim()){ toast('Transkrip masih kosong'); return; }
+  $('aiNote').textContent='Menjana…';
+  try{
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({contents:[{parts:[{text:promptText()}]}]})
+    });
+    const d = await r.json();
+    const txt = d?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    $('jsonMasuk').value = txt.replace(/```json|```/g,'').trim();
+    $('aiNote').textContent='Siap. Semak sebelum import.';
+  }catch(e){ $('aiNote').textContent='Gagal: '+e.message; }
+}
+function importJSON(){
+  let raw = $('jsonMasuk').value.replace(/```json|```/g,'').trim();
+  if(!raw){ toast('Kotak JSON kosong'); return; }
+  try{
+    const arr = JSON.parse(raw);
+    if(!Array.isArray(arr)) throw new Error('Bukan array');
+    arr.forEach(o=>{
+      S.perkara.push({
+        id:uid(), no:o.no||String(S.perkara.length+1), tajuk:o.tajuk||'', isi:o.isi||'',
+        disposisi:['Makluman','Perhatian','Tindakan'].includes(o.disposisi)?o.disposisi:'Makluman',
+        pemilik:o.pemilik||'', tarikh_sasar:o.tarikh_sasar||'', status:'Belum Mula'
+      });
+    });
+    save(); renderPerkara(); stats();
+    toast(`${arr.length} perkara diimport`); go('bilik');
+  }catch(e){ toast('JSON tidak sah: '+e.message); }
+}
+
+/* ================= Minit ================= */
+function blokAhli(list){
+  return list.map((a,i)=>`<div class="ahli">${i+1}. <span class="nm">${esc(a.nama||'(nama belum diisi)')}</span>
+    ${a.pengerusi?'<span style="float:right">-&nbsp;&nbsp;Pengerusi</span>':''}
+    <div style="padding-left:18px">${esc(a.jawatan)}<br>${esc(a.pejabat)}<br>Jabatan Pendidikan Negeri Kedah</div>
+    ${a.kehadiran==='wakil'&&a.wakil?`<div style="padding-left:18px"><i>Diwakili oleh: ${esc(a.wakil)}</i></div>`:''}
+    </div>`).join('');
+}
+function badanMinit(){
+  return S.perkara.map(p=>{
+    const isTop = !p.no.includes('.');
+    const isi = (p.isi||'').split(/\n+/).filter(Boolean)
+      .map(t=>`<p style="margin:0 0 6px;text-align:justify">${esc(t)}</p>`).join('');
+    let disp = '';
+    if(p.disposisi==='Tindakan'){
+      const owners = (p.pemilik||'').split(/\n+/).filter(Boolean)
+        .map(o=>`${esc(o)}<br>`).join('');
+      disp = `<div class="tind"><b>Tindakan:</b>${owners||'—'}
+        ${p.tarikh_sasar?`<i>Sasar: ${tarikhBM(p.tarikh_sasar)}</i>`:''}</div>`;
+    } else {
+      disp = `<div class="disp">${p.disposisi}</div>`;
+    }
+    return `<div class="sec">
+      <div class="${isTop?'sec-t':'sub-t'}">${esc(p.no)}. ${esc(p.tajuk)}</div>
+      <div style="padding-left:${isTop?'0':'18px'}">${isi}${disp}</div>
+    </div>`;
+  }).join('');
+}
+function renderMinit(){
+  const hadir = S.ahli.filter(a=>a.kehadiran!=='tidak' && a.kategori!=='Turut Hadir' && a.kategori!=='Urus Setia');
+  const tidak = S.ahli.filter(a=>a.kehadiran==='tidak');
+  const turut = S.ahli.filter(a=>a.kategori==='Turut Hadir');
+  const urus  = S.ahli.filter(a=>a.kategori==='Urus Setia');
+  const tajuk = `${S.t.tajuk}<br>BILANGAN ${S.m.bil} TAHUN ${S.m.tahun}`;
+
+  $('paper').innerHTML = `
+    <div class="terhad">TERHAD</div><div class="terhad r">TERHAD</div>
+    <h1>${tajuk}</h1>
+    <h1 style="margin:26px 0 18px">LAMPIRAN A</h1>
+    <div class="sec-t" style="text-decoration:underline">Hadir</div>${blokAhli(hadir)}
+    ${tidak.length?`<div class="sec-t" style="text-decoration:underline;margin-top:14px">Tidak Hadir</div>${blokAhli(tidak)}`:''}
+    ${turut.length?`<div class="sec-t" style="text-decoration:underline;margin-top:14px">Turut Hadir</div>${blokAhli(turut)}`:''}
+    ${urus.length?`<div class="sec-t" style="text-decoration:underline;margin-top:14px">Urus Setia</div>${blokAhli(urus)}`:''}
+    <hr>
+    <table class="meta"><tbody>
+      <tr><td>Tarikh</td><td>:</td><td>${tarikhBM(S.m.tarikh)}</td></tr>
+      <tr><td>Masa</td><td>:</td><td>${esc(S.m.masa)}</td></tr>
+      <tr><td>Tempat</td><td>:</td><td>${esc(S.m.tempat)}</td></tr>
+      <tr><td>Pengerusi</td><td>:</td><td>${esc(namaAhli(S.m.pengerusi))}</td></tr>
+      <tr><td>Kehadiran</td><td>:</td><td>Rujuk Lampiran A</td></tr>
+    </tbody></table>
+    <div style="height:16px"></div>
+    ${badanMinit()}
+    <hr>
+    <table style="width:100%;font-size:12px"><tbody><tr>
+      <td style="width:33%">Disediakan Oleh<br><br><br><b>${esc(S.t.sedia||'—')}</b><br>${esc(S.t.sediaJ)}</td>
+      <td style="width:33%">Disemak Oleh<br><br><br><b>${esc(S.t.semak||'—')}</b><br>${esc(S.t.semakJ)}</td>
+      <td style="width:33%">Diluluskan Oleh<br><br><br><b>${esc(S.t.lulus||'—')}</b><br>${esc(S.t.lulusJ)}</td>
+    </tr></tbody></table>
+    <p style="font-size:11px;font-style:italic;margin-top:18px">Minit mesyuarat ini dijana oleh Sistem Minit JPN Kedah dan tidak memerlukan tanda tangan.</p>
+  `;
+}
+function eksportWord(){
+  renderMinit();
+  const body = $('paper').innerHTML.replace(/<div class="terhad[^>]*>TERHAD<\/div>/g,'');
+  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office"
+    xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+    <head><meta charset="utf-8">
+    <style>
+      @page Sec1 { size:21cm 29.7cm; margin:2.5cm 2.5cm 2cm 2.5cm;
+                   mso-header-margin:1.2cm; mso-footer-margin:1.2cm;
+                   mso-header:h1; mso-footer:f1; }
+      div.Sec1{page:Sec1}
+      body{font-family:Arial,sans-serif;font-size:11pt;line-height:1.4;color:#000}
+      h1{font-size:12pt;font-weight:bold;text-align:center;text-transform:uppercase}
+      p.MsoHeader,p.MsoFooter{font-family:Arial;font-size:8pt;color:#808080;margin:0}
+      .sec-t{font-weight:bold;text-transform:uppercase}
+      .disp{text-align:right;font-weight:bold}
+      .tind{text-align:right;font-size:10pt}
+      .ahli{margin-bottom:10pt}
+      table{border-collapse:collapse}
+    </style></head>
+    <body><div class="Sec1">${body}
+      <div style='mso-element:header' id="h1"><p class="MsoHeader">TERHAD</p></div>
+      <div style='mso-element:footer' id="f1"><p class="MsoFooter">
+        <span style='mso-field-code:PAGE'></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TERHAD</p></div>
+    </div></body></html>`;
+  const blob = new Blob(['\ufeff', html], {type:'application/msword'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Minit_Mesyuarat_Khas_JPN_PPD_Bil${S.m.bil}_${S.m.tahun}.doc`;
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('Fail Word dimuat turun');
+}
+function salinWhatsApp(){
+  const t = S.perkara.filter(p=>p.disposisi==='Tindakan');
+  let out = `*KEPUTUSAN MESYUARAT*\n${S.t.tajuk}\nBil. ${S.m.bil}/${S.m.tahun} — ${tarikhBM(S.m.tarikh)}\n\n`;
+  if(!t.length) out += '_Tiada perkara tindakan direkodkan._';
+  t.forEach(p=>{
+    out += `📌 *${p.no}. ${p.tajuk}*\n${(p.isi||'').slice(0,220)}\n`;
+    out += `Tindakan: ${(p.pemilik||'—').replace(/\n/g,', ')}\n`;
+    if(p.tarikh_sasar) out += `Sasar: ${tarikhBM(p.tarikh_sasar)}\n`;
+    out += `Ruj: ${refId(p)}\n\n`;
+  });
+  navigator.clipboard.writeText(out).then(()=>toast('Ringkasan disalin'))
+    .catch(()=>toast('Salin gagal'));
+}
+
+/* ================= Matriks ================= */
+function renderMatriks(){
+  const t = S.perkara.filter(p=>p.disposisi==='Tindakan');
+  if(!t.length){ $('matriks').innerHTML='<div class="empty">Belum ada perkara berdisposisi <b>Tindakan</b>. Matriks akan terisi sendiri.</div>'; return; }
+  const today = new Date().toISOString().slice(0,10);
+  $('matriks').innerHTML = `<div style="overflow-x:auto"><table class="matrix">
+    <thead><tr><th>Rujukan</th><th>Perkara</th><th>Pemilik</th><th>Sasar</th><th>Status</th></tr></thead>
+    <tbody>${t.map(p=>{
+      const lewat = p.tarikh_sasar && p.tarikh_sasar < today && p.status!=='Selesai';
+      const cls = p.status==='Selesai'?'p-selesai':p.status==='Dalam Tindakan'?'p-dalam':'p-belum';
+      return `<tr>
+        <td class="mono" style="font-size:11px">${esc(refId(p))}</td>
+        <td><b>${esc(p.tajuk)}</b></td>
+        <td>${esc(p.pemilik||'—').replace(/\n/g,'<br>')}</td>
+        <td>${p.tarikh_sasar?tarikhBM(p.tarikh_sasar):'—'}${lewat?'<br><span class="pill p-belum">LEWAT</span>':''}</td>
+        <td><select onchange="setP('${p.id}','status',this.value);renderMatriks()">
+          ${['Belum Mula','Dalam Tindakan','Selesai'].map(s=>`<option ${p.status===s?'selected':''}>${s}</option>`).join('')}
+        </select><div style="margin-top:5px"><span class="pill ${cls}">${p.status}</span></div></td>
+      </tr>`;}).join('')}</tbody></table></div>`;
+}
+
+/* ================= Fail ================= */
+function simpanFail(){
+  const blob = new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=`minit_bil${S.m.bil}_${S.m.tahun}.json`; a.click(); URL.revokeObjectURL(a.href);
+  toast('Fail sandaran disimpan');
+}
+function bukaFail(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ S=JSON.parse(r.result); save(); renderAll(); toast('Fail dibuka'); }
+                 catch(err){ toast('Fail tidak sah'); } };
+  r.readAsText(f);
+}
+async function resetSemua(){
+  if(!confirm('Semua data mesyuarat ini akan dipadam. Teruskan?')) return;
+  await store.del(KEY); S=seed(); save(); renderAll(); toast('Data ditetapkan semula');
+}
+
+/* ================= Sync (GAS) ================= */
+function bindSync(){
+  $('y_url').value = S.t.gasUrl || '';
+  $('y_pin').value = S.t.pin || '';
+  $('y_url').oninput = e => { S.t.gasUrl = e.target.value.trim(); save(); };
+  $('y_pin').oninput = e => { S.t.pin = e.target.value.trim(); save(); };
+}
+function jsonp(action, params){
+  return new Promise((res, rej)=>{
+    if(!S.t.gasUrl) return rej(new Error('URL Web App belum diisi'));
+    const cb = 'cb' + Math.random().toString(36).slice(2,9);
+    const t = setTimeout(()=>{ cleanup(); rej(new Error('Talian tamat masa')); }, 20000);
+    function cleanup(){ clearTimeout(t); delete window[cb]; s.remove(); }
+    window[cb] = d => { cleanup(); res(d); };
+    const q = new URLSearchParams(Object.assign({action, callback:cb}, params||{}));
+    const s = document.createElement('script');
+    s.src = S.t.gasUrl + '?' + q.toString();
+    s.onerror = () => { cleanup(); rej(new Error('Gagal hubungi Web App')); };
+    document.body.appendChild(s);
+  });
+}
+async function gasPost(payload){
+  if(!S.t.gasUrl) throw new Error('URL Web App belum diisi');
+  // text/plain mengelak preflight CORS
+  const r = await fetch(S.t.gasUrl, {
+    method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify(payload)
+  });
+  return r.json();
+}
+const midSemasa = () => 'M' + S.m.tahun + '-' + S.m.bil;
+
+async function ujiTalian(){
+  $('y_stat').textContent='Menguji…';
+  try{ const d = await jsonp('ping'); $('y_stat').textContent = d.ok ? '● Web App hidup' : '✕ gagal'; }
+  catch(e){ $('y_stat').textContent = '✕ ' + e.message; }
+}
+async function hantarKeSheets(){
+  $('y_stat').textContent='Menghantar…';
+  try{
+    const d = await gasPost({
+      action:'simpan', pin:S.t.pin, pengguna:S.t.sedia||'urusetia',
+      mesyuarat:{id:midSemasa(), bil:S.m.bil, tahun:S.m.tahun, tarikh:S.m.tarikh,
+                 masa:S.m.masa, tempat:S.m.tempat, pengerusi_id:S.m.pengerusi, status:'Draf'},
+      ahli: S.ahli.map(a=>({id:a.id, nama:a.nama, jawatan:a.jawatan, pejabat:a.pejabat,
+                            kategori:a.kategori, pengerusi:!!a.pengerusi, aktif:true})),
+      kehadiran: S.ahli.map(a=>({ahli_id:a.id, kehadiran:a.kehadiran, wakil:a.wakil||''})),
+      perkara: S.perkara.map(p=>({id:p.id, no:p.no, ref:refId(p), tajuk:p.tajuk, isi:p.isi,
+                                  disposisi:p.disposisi, pemilik:p.pemilik,
+                                  tarikh_sasar:p.tarikh_sasar, status:p.status}))
+    });
+    if(!d.ok) throw new Error(d.ralat);
+    $('y_stat').textContent = `● Tersimpan (${d.perkara} perkara)`;
+    toast('Dihantar ke Google Sheets');
+  }catch(e){ $('y_stat').textContent='✕ '+e.message; toast('Gagal: '+e.message); }
+}
+async function tarikDariSheets(){
+  if(!confirm('Data dalam pelayar akan digantikan dengan data Sheets. Teruskan?')) return;
+  $('y_stat').textContent='Menarik…';
+  try{
+    const d = await jsonp('muat', {pin:S.t.pin, mesyuarat_id:midSemasa()});
+    if(!d.ok) throw new Error(d.ralat);
+    const x = d.data;
+    if(x.ahli && x.ahli.length){
+      const h = {}; (x.kehadiran||[]).forEach(k=>h[k.ahli_id]=k);
+      S.ahli = x.ahli.map(a=>({id:a.id, nama:a.nama, jawatan:a.jawatan, pejabat:a.pejabat,
+        kategori:a.kategori, pengerusi:a.pengerusi===true||a.pengerusi==='TRUE',
+        kehadiran:(h[a.id]||{}).kehadiran||'hadir', wakil:(h[a.id]||{}).wakil||''}));
+    }
+    if(x.mesyuarat){
+      S.m.tarikh = x.mesyuarat.tarikh ? String(x.mesyuarat.tarikh).slice(0,10) : S.m.tarikh;
+      S.m.masa = x.mesyuarat.masa || S.m.masa;
+      S.m.tempat = x.mesyuarat.tempat || S.m.tempat;
+      S.m.pengerusi = x.mesyuarat.pengerusi_id || S.m.pengerusi;
+    }
+    if(x.perkara && x.perkara.length){
+      S.perkara = x.perkara.map(p=>({id:p.id, no:String(p.no), tajuk:p.tajuk, isi:p.isi,
+        disposisi:p.disposisi, pemilik:p.pemilik,
+        tarikh_sasar:p.tarikh_sasar?String(p.tarikh_sasar).slice(0,10):'',
+        status:p.status||'Belum Mula'}));
+    }
+    (x.tetapan||[]).forEach(t=>{ if(['tajuk','ref','sediaJ','semakJ','lulusJ'].includes(t.kunci)) S.t[t.kunci]=t.nilai; });
+    save(); renderAll(); bindSync();
+    $('y_stat').textContent='● Dimuat turun';
+    toast('Data ditarik dari Sheets');
+  }catch(e){ $('y_stat').textContent='✕ '+e.message; toast('Gagal: '+e.message); }
+}
+async function tarikBerbangkit(){
+  $('y_stat').textContent='Menarik…';
+  try{
+    const d = await jsonp('berbangkit', {pin:S.t.pin, mesyuarat_id:midSemasa()});
+    if(!d.ok) throw new Error(d.ralat);
+    const list = d.data || [];
+    if(!list.length){
+      $('y_bangkit').innerHTML='<div class="empty">Tiada tindakan tertunggak. Semua selesai.</div>';
+      $('y_stat').textContent='● Bersih'; return;
+    }
+    $('y_bangkit').innerHTML = `<div style="overflow-x:auto"><table class="matrix">
+      <thead><tr><th>Rujukan asal</th><th>Perkara</th><th>Pemilik</th><th>Status</th><th></th></tr></thead>
+      <tbody>${list.map(p=>`<tr>
+        <td class="mono" style="font-size:11px">${esc(p.ref)}</td>
+        <td><b>${esc(p.tajuk)}</b></td>
+        <td>${esc(String(p.pemilik||'—')).replace(/\n/g,'<br>')}</td>
+        <td><span class="pill p-${(p.status||'').toLowerCase().includes('dalam')?'dalam':'belum'}">${esc(p.status)}</span></td>
+        <td><button class="btn ghost sm" onclick='sisipBerbangkit(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Sisip ke minit</button></td>
+      </tr>`).join('')}</tbody></table></div>`;
+    $('y_stat').textContent = `● ${list.length} tertunggak`;
+  }catch(e){ $('y_stat').textContent='✕ '+e.message; toast('Gagal: '+e.message); }
+}
+function sisipBerbangkit(p){
+  S.perkara.push({id:p.id, no:String(S.perkara.length+1), tajuk:'PERKARA BERBANGKIT — '+p.tajuk,
+    isi:`Mesyuarat dimaklumkan bahawa tindakan bagi perkara ${p.ref} masih dalam proses.`,
+    disposisi:'Tindakan', pemilik:String(p.pemilik||''),
+    tarikh_sasar:p.tarikh_sasar?String(p.tarikh_sasar).slice(0,10):'',
+    status:p.status||'Belum Mula'});
+  save(); renderPerkara(); stats(); toast('Disisip ke Bilik Mesyuarat');
+}
+
+/* ================= Edaran Keputusan ================= */
+function penerimaEdaran(){
+  return S.ahli.filter(a=>(a.kategori==='G5'||a.kategori==='PPD') && (a.emel||'').trim())
+    .map(a=>({nama:a.nama, jawatan:a.jawatan, pejabat:a.pejabat, emel:a.emel.trim(), kategori:a.kategori}));
+}
+function payloadEdaran(){
+  return {
+    pin: S.t.pin, pengguna: S.t.sedia || 'urusetia',
+    mesyuarat: {id:midSemasa(), bil:S.m.bil, tahun:S.m.tahun, tarikh:S.m.tarikh,
+                masa:S.m.masa, tempat:S.m.tempat},
+    perkara: S.perkara.map(p=>({no:p.no, ref:refId(p), tajuk:p.tajuk, isi:p.isi,
+              disposisi:p.disposisi, pemilik:p.pemilik, tarikh_sasar:p.tarikh_sasar}))
+  };
+}
+function setDisemak(v){
+  S.m.disemak = v; save();
+  $('btnHantar').disabled = !v;
+  renderPenerima();
+}
+function renderPenerima(){
+  const list = penerimaEdaran();
+  const kosong = S.ahli.filter(a=>(a.kategori==='G5'||a.kategori==='PPD') && !(a.emel||'').trim());
+  $('e_penerima').innerHTML = `
+    <div class="eyebrow">Penerima (${list.length})</div>
+    ${list.length ? `<div style="overflow-x:auto"><table class="matrix">
+      <thead><tr><th>Penerima</th><th>E-mel</th><th>Tindakan</th></tr></thead>
+      <tbody>${list.map(p=>{
+        const n = S.perkara.filter(x=>{
+          if(x.disposisi!=='Tindakan') return false;
+          const own = (x.pemilik||'').toLowerCase();
+          const dae = (p.pejabat||'').replace('Pejabat Pendidikan Daerah','').trim().toLowerCase();
+          if(p.nama && own.includes(p.nama.toLowerCase())) return true;
+          if(dae && own.includes(dae)) return true;
+          if(p.kategori==='PPD' && own.includes('semua ppd')) return true;
+          if(p.kategori==='G5' && own.includes('semua sektor')) return true;
+          return false;
+        }).length;
+        return `<tr><td><b>${esc(p.nama||'(tanpa nama)')}</b><br>
+          <span style="font-size:12px;color:var(--muted)">${esc(p.pejabat)}</span></td>
+          <td class="mono" style="font-size:12px">${esc(p.emel)}</td>
+          <td><span class="pill ${n?'p-dalam':'p-selesai'}">${n} perkara</span></td></tr>`;
+      }).join('')}</tbody></table></div>` : '<div class="empty">Tiada e-mel diisi. Buka tab <b>Ahli &amp; Kehadiran</b>.</div>'}
+    ${kosong.length ? `<div class="note" style="margin-top:12px"><b>${kosong.length} ahli tiada e-mel</b> —
+       mereka tidak akan menerima edaran: ${esc(kosong.map(a=>a.pejabat).join(', '))}</div>` : ''}`;
+}
+async function janaPdfKeputusan(){
+  $('e_stat').textContent='Menjana PDF…';
+  try{
+    const d = await gasPost(Object.assign({action:'janaPdf'}, payloadEdaran()));
+    if(!d.ok) throw new Error(d.ralat);
+    window.open(d.url,'_blank');
+    $('e_stat').textContent='● PDF siap';
+  }catch(e){ $('e_stat').textContent='✕ '+e.message; toast('Gagal: '+e.message); }
+}
+async function hantarKeputusan(){
+  const list = penerimaEdaran();
+  if(!list.length){ toast('Tiada e-mel penerima'); return; }
+  const msg = `Keputusan Bil. ${S.m.bil}/${S.m.tahun} akan diemel kepada ${list.length} penerima:\n\n`
+    + list.map(p=>'• ' + (p.nama||p.pejabat) + ' — ' + p.emel).join('\n')
+    + '\n\nTindakan ini tidak boleh ditarik balik. Teruskan?';
+  if(!confirm(msg)) return;
+  $('e_stat').textContent='Menghantar…'; $('btnHantar').disabled = true;
+  try{
+    const d = await gasPost(Object.assign({action:'hantarKeputusan', disemak:true,
+                                           penerima:list}, payloadEdaran()));
+    if(!d.ok) throw new Error(d.ralat);
+    $('e_stat').textContent = `● ${d.dihantar} e-mel dihantar`;
+    toast(`Keputusan diedar kepada ${d.dihantar} penerima`);
+    if(d.gagal && d.gagal.length) alert('Gagal dihantar:\n' + d.gagal.join('\n'));
+  }catch(e){ $('e_stat').textContent='✕ '+e.message; toast('Gagal: '+e.message); }
+  finally{ $('btnHantar').disabled = !S.m.disemak; }
+}
+
+/* ================= Boot ================= */
+function renderAll(){
+  S.ahli.forEach(a=>{ if(a.emel===undefined) a.emel=''; });
+  bindPapan(); renderAhli(); renderPerkara(); renderMinit(); renderMatriks(); bindSync();
+  $('m_disemak').checked = !!S.m.disemak;
+  $('btnHantar').disabled = !S.m.disemak;
+  renderPenerima();
+}
+(async function(){
+  const raw = await store.get(KEY);
+  if(raw){ try{ S = JSON.parse(raw); }catch(e){} }
+  renderAll();
+})();
+</script>
+</body>
+</html>
